@@ -10,6 +10,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.List;
 import java.util.TimeZone;
 
@@ -34,13 +35,17 @@ public class Instantiation implements CommandLineRunner {
         User gui = new User(null, "Guilherme", "GuilhermeZ01@email");
         User carol = new User(null, "Carol", "Carol@Gmail.com");
         User nicole = new User(null, "Nicole", "NicoleMaria@Gmail");
-        userRepository.saveAll(List.of(gui, carol, nicole));
+        userRepository.saveAll(Arrays.asList(gui, carol, nicole));
 
         Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem",
                 "Vou viajar para São Paulo", new AuthorDTO(carol));
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia   ",
                 "Acordei feliz hoje!", new AuthorDTO(carol));
 
-        postRepository.saveAll(List.of(post1, post2));
+        postRepository.saveAll(Arrays.asList(post1, post2));
+
+        carol.getPosts().addAll(Arrays.asList(post1, post2)); //Conectando o Author com os posts
+        userRepository.save(carol); //salvando
+
     }
 }
