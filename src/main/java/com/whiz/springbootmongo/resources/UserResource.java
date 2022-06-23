@@ -1,5 +1,6 @@
 package com.whiz.springbootmongo.resources;
 
+import com.whiz.springbootmongo.domain.Post;
 import com.whiz.springbootmongo.domain.User;
 import com.whiz.springbootmongo.dto.UserDTO;
 import com.whiz.springbootmongo.service.UserService;
@@ -35,6 +36,12 @@ public class UserResource {
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         User user = userService.findById(id);
         return ResponseEntity.ok().body(new UserDTO(user));
+    }
+
+    @RequestMapping(value = "/{id}/posts", method = RequestMethod.GET)
+    public ResponseEntity<List<Post>> findPostById(@PathVariable String id) {
+        List<Post> posts = userService.findById(id).getPosts();
+        return ResponseEntity.ok().body(posts);
     }
 
     @RequestMapping(method = RequestMethod.POST)
