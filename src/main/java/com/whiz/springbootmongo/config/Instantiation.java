@@ -3,6 +3,7 @@ package com.whiz.springbootmongo.config;
 import com.whiz.springbootmongo.domain.Post;
 import com.whiz.springbootmongo.domain.User;
 import com.whiz.springbootmongo.dto.AuthorDTO;
+import com.whiz.springbootmongo.dto.ComentDTO;
 import com.whiz.springbootmongo.repository.PostRepository;
 import com.whiz.springbootmongo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,10 +43,16 @@ public class Instantiation implements CommandLineRunner {
         Post post2 = new Post(null, sdf.parse("23/03/2018"), "Bom dia   ",
                 "Acordei feliz hoje!", new AuthorDTO(carol));
 
+        ComentDTO com1 = new ComentDTO("Boa viagem mano!", sdf.parse("21/03/2018"), new AuthorDTO(gui));
+        ComentDTO com2 = new ComentDTO("Aproveite!", sdf.parse("22/03/2018"), new AuthorDTO(nicole));
+        ComentDTO com3 = new ComentDTO("Tenha um otimo dia!", sdf.parse("23/03/2018"), new AuthorDTO(gui));
+
+        post1.getComents().addAll(Arrays.asList(com1, com2));
+        post2.getComents().addAll(Arrays.asList(com3));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
 
         carol.getPosts().addAll(Arrays.asList(post1, post2)); //Conectando o Author com os posts
         userRepository.save(carol); //salvando
-
     }
 }
