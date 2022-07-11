@@ -2,9 +2,7 @@ package com.whiz.springbootmongo.domain;
 
 import com.whiz.springbootmongo.dto.AuthorDTO;
 import com.whiz.springbootmongo.dto.ComentDTO;
-import com.whiz.springbootmongo.dto.UserDTO;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
@@ -23,7 +21,7 @@ public class Post implements Serializable {
     private String body;
     private AuthorDTO author;
 
-    private List<ComentDTO> coments = new ArrayList<>();
+    private List<ComentDTO> comments = new ArrayList<>();
 
     public Post(){
     }
@@ -76,12 +74,12 @@ public class Post implements Serializable {
         this.author = author;
     }
 
-    public List<ComentDTO> getComents() {
-        return coments;
+    public List<ComentDTO> getComments() {
+        return comments;
     }
 
-    public void setComents(List<ComentDTO> coments) {
-        this.coments = coments;
+    public void setComments(List<ComentDTO> comments) {
+        this.comments = comments;
     }
 
     @Override
